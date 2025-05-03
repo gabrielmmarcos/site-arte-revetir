@@ -1,0 +1,766 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arte de Revestir</title>
+
+    <link rel="icon" href="img/logo.png" type="image/png" />
+
+
+    <!-- tailwind css -->
+    <link rel="stylesheet" href="./output.css">
+
+    <!-- icones -->
+    <script src="https://kit.fontawesome.com/6aa0405f4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <!-- style -->
+    <style>
+        .nav-for-slider .swiper-slide {
+            cursor: pointer;
+            margin-right: 0 !important;
+        }
+
+        .swiper-wrapper {
+            height: auto;
+        }
+
+        .nav-for-slider .swiper-slide img {
+            border: 2px solid transparent;
+            border-radius: 28px;
+        }
+
+        .nav-for-slider .swiper-slide-thumb-active img {
+            border-color: rgb(0, 0, 0);
+
+        }
+
+        .lightbox {
+            display: none;
+            position: fixed;
+            z-index: 999;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.8);
+        }
+
+        .lightbox-image {
+            display: block;
+            margin: auto;
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .close {
+            color: #fff;
+            font-size: 3em;
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            cursor: pointer;
+        }
+
+        .gallery {
+            width: 90vw;
+            max-width: 1200px;
+            margin: 0 auto;
+            grid-template-rows: 1fr;
+            grid-column-gap: 30px;
+            grid-row-gap: 30px;
+        }
+
+        .gallery img {
+            max-width: 100%;
+            cursor: pointer;
+        }
+
+        .gallery img:hover {
+            max-width: 100%;
+            cursor: pointer;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 1s ease-out both;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation bar -->
+
+
+    <!-- <div class="hidden md:block bg-white border-b border-gray-200 text-sm text-gray-700 font-[Poppins]">
+        <div class="max-w-7xl mx-auto px-4 flex justify-between items-center py-2 flex-wrap gap-4">
+            <div class="flex flex-wrap items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400">
+                        <i class="fas fa-map-marker-alt"></i>
+                    </span>
+                    <span>Santo-Amaro</span>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400"><i class="fas fa-clock"></i></span>
+                    <span>Seg- Sáb 8:00 - 18:00</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <span class="text-yellow-400"><i class="fas fa-phone-alt"></i></span>
+                    <span>11 97194-7328</span>
+                </div>
+            </div>
+            <div class="hidden sm:flex items-center gap-3">
+                <span class="text-gray-700">Entrar em Contato:</span>
+                <a href="#" class="hover:text-yellow-400"><i class="fab fa-whatsapp"></i></a>
+                <a href="#" class="hover:text-yellow-400"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-yellow-400"><i class="fab fa-facebook-f"></i></a>
+            </div>
+        </div>
+    </div> -->
+
+    <!-- Header -->
+    <header class="  bg-white  font-[Poppins]">
+        <div class="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center border-b border-white/30">
+            <!-- Logo -->
+            <div class="flex items-center gap-2">
+                <img src="img/logo.png" alt="Logo" class="w-10 h-10 object-contain" />
+                <span class="font-bold text-lg text-black uppercase">Arte <span class="text-gray-400">de</span>
+                    Revestir</span>
+            </div>
+
+            <!-- Hamburger Button (Mobile) -->
+            <button id="menuToggle" class="lg:hidden text-2xl text-black">
+                &#9776;
+            </button>
+
+            <!-- Desktop Menu -->
+            <nav class="hidden lg:flex gap-6 text-black font-medium">
+                <a href="#about" class="hover:underline hover:underline-offset-4">Sobre Nós</a>
+                <a href="#services" class="hover:underline hover:underline-offset-4">Especialidades</a>
+                <a href="#projects" class="hover:underline hover:underline-offset-4">Projetos</a>
+                <a href="#faq" class="hover:underline hover:underline-offset-4">Dúvidas</a>
+            </nav>
+
+            <!-- Right section -->
+            <div class="hidden lg:flex items-center gap-4">
+                <a href="#"
+                    class="mt-4 lg:mt-0 flex items-center gap-2 bg-black text-white hover:text-yellow-400 hover:scale-110 rounded-full font-semibold py-3 px-4 transition-all duration-300">
+                    Solicitar Orçamento
+                    <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M1.75 7L16.4167 7M11.8333 12.5L16.6852 7.64818C16.9907 7.34263 17.1435 7.18985 17.1435 7C17.1435 6.81015 16.9907 6.65737 16.6852 6.35182L11.8333 1.5"
+                            stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="lg:hidden hidden px-4 pb-4">
+            <nav class="flex flex-col gap-2 text-black font-medium">
+                <a href="#about" class="hover:underline hover:underline-offset-4">Sobre Nós</a>
+                <a href="#services" class="hover:underline hover:underline-offset-4">Especialidades</a>
+                <a href="#projects" class="hover:underline hover:underline-offset-4">Projetos</a>
+                <a href="#faq" class="hover:underline hover:underline-offset-4">Dúvidas</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section
+        class="flex items-center justify-center py-18 lg:h-[550px]  font-[Poppins] text-center bg-[url('img/hero2.jpg')] bg-cover bg-center bg-no-repeat">
+        <div class="max-w-3xl mx-auto items-center  px-6 space-y-6 ">
+            <!-- Nome da Empresa -->
+            <span
+                class="inline-block text-yellow-400 font-semibold text-sm uppercase tracking-widest animate-pulse animate-fadeInUp">
+                Arte de Revestir
+            </span>
+
+            <h1 class="text-3xl md:text-5xl font-bold text-white animate-fadeInUp">
+                Transforme sua casa<br />no lugar dos seus <span class="text-yellow-300">Sonhos</span>
+            </h1>
+
+
+            <!-- Parágrafo -->
+            <p class="text-lg text-gray-50 animate-fadeInUp">
+                Transformamos seu espaço com agilidade, preço justo e excelência.<br />
+                Solicite um orçamento sem compromisso.
+            </p>
+
+            <!-- Botões -->
+            <div class="flex flex-col sm:flex-row gap-4 justify-center animate-fadeInUp">
+                <a href="#contato"
+                    class="bg-yellow-400 text-white px-6 py-3 rounded-full font-medium hover:scale-105 transition ">
+                    Solicitar Orçamento
+                </a>
+                <a href="#projects"
+                    class=" bg-yellow-50 text-yellow-400 px-6 py-3 rounded-full font-medium border-[2px] border-yellow-400 hover:border-yellow-400  shadow-md hover:scale-105 transition">
+                    Ver projetos
+                </a>
+
+            </div>
+
+            <!-- Ícones Sociais -->
+            <div class="flex gap-5 justify-center py-2 animate-fadeInUp lg:hidden ">
+                <a href="#" class="text-white   hover:text-yellow-300 hover:scale-110 transition"><i
+                        class="fab fa-whatsapp text-2xl"></i></a>
+                <a href="#" class="text-white hover:text-yellow-300  hover:scale-110 transition"><i
+                        class="fab fa-instagram text-2xl"></i></a>
+                <a href="#" class="text-white  hover:text-yellow-300  hover:scale-110 transition"><i
+                        class="fas fa-envelope text-2xl"></i></a>
+                <a href="#" class="text-white  hover:text-yellow-300  hover:scale-110 transition"><i
+                        class="fab fa-linkedin text-2xl"></i></a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Sobre Nós -->
+    <section class="w-full bg-white py-16 px-6 lg:px-16 font-[Poppins] animate-fadeInUp">
+        <div class="max-w-7xl mx-auto flex flex-col-reverse lg:flex-row-reverse items-center gap-10">
+
+            <!-- Imagem à esquerda -->
+            <div class="w-full lg:w-1/2">
+                <img src="img/aboutus.jpg" alt="Equipe ou Projeto"
+                    class="rounded-xl w-full h-auto object-cover shadow-md">
+            </div>
+
+            <!-- Conteúdo à direita -->
+            <div class="w-full lg:w-1/2 flex flex-col justify-start items-start lg:items-start gap-4">
+                <span class="text-yellow-500 text-sm font-semibold uppercase tracking-wide itmes-start">
+                    Sobre nós
+                </span>
+                <h2 class="text-gray-900 text-2xl md:text-4xl font-bold leading-normal text-start lg:text-start">
+                    Mais do que Reformas, entregamos Confiança e Excelência
+                </h2>
+                <p class="text-gray-500 text-base font-normal leading-relaxed text-start lg:text-start">
+                    Somos três jovens empreendedores apaixonados por transformar ambientes com qualidade,
+                    capricho e personalidade. Criamos uma empresa de revestimentos com foco em confiança e
+                    atenção aos detalhes.
+                </p>
+                <p class="text-gray-500 text-base font-normal leading-relaxed text-start lg:text-start">
+                    Começamos em 2023 com dedicação total a cada projeto. Hoje, oferecemos soluções sob
+                    medida, priorizando excelência, durabilidade e um atendimento próximo e transparente.
+                </p>
+                <div class="w-full lg:justify-start justify-center items-center sm:gap-10 gap-5 inline-flex">
+                    <div class="flex-col justify-start items-start inline-flex">
+                        <h3 class="text-gray-900 text-4xl font-bold font-manrope leading-normal">2+</h3>
+                        <h6 class="text-gray-500 text-base font-normal leading-relaxed">Anos de experiência</h6>
+                    </div>
+                    <div class="flex-col justify-start items-start inline-flex">
+                        <h4 class="text-gray-900 text-4xl font-bold font-manrope leading-normal">50+</h4>
+                        <h6 class="text-gray-500 text-base font-normal leading-relaxed">Projetos entregues</h6>
+                    </div>
+                    <div class="flex-col justify-start items-start inline-flex">
+                        <h4 class="text-gray-900 text-4xl font-bold font-manrope leading-normal">49+</h4>
+                        <h6 class="text-gray-500 text-base font-normal leading-relaxed">Clientes satisfeitos
+                        </h6>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+    <!-- Especialidade -->
+    <section id="services" class="bg-black py-12 md:px-16 font-[Poppins]">
+        <div class="gap-6 max-w-7xl mx-auto px-6 flex flex-col lg:flex-row min-h-full">
+
+            <!-- Coluna da esquerda -->
+            <div class="flex flex-col flex-[0.8] rounded-2xl lg:rounded-none">
+                <img src="img/hero.jpg" alt="Imagem reforma residencial"
+                    class="mb-6 w-full h-auto object-cover rounded-2xl lg:rounded-none lg:rounded-br-2xl">
+
+                <div class="bg-white p-6 flex flex-col flex-1 rounded-2xl lg:rounded-none lg:rounded-tr-2xl">
+                    <h4 class="text-yellow-500 font-semibold uppercase text-sm mb-2">Especialidades</h4>
+                    <h2 class="text-2xl md:text-3xl font-bold mb-4 text-gray-800">
+                        Transformamos seu espaço com qualidade e agilidade
+                    </h2>
+                    <p class="text-gray-700 font-semibold mb-2">
+                        Soluções completas em reforma para residências e comércios.
+                    </p>
+                    <p class="text-gray-600 mb-6">
+                        Da demolição ao acabamento, cuidamos de cada detalhe da sua reforma com equipe especializada,
+                        materiais de qualidade e prazos que cabem no seu planejamento.
+                    </p>
+                    <a href="#"
+                        class="inline-block mt-auto bg-yellow-500 border border-transparent text-white w-fit font-bold py-2 px-6 rounded-full hover:bg-white hover:text-yellow-500 hover:border-yellow-500 transition">
+                        Solicite um orçamento
+                    </a>
+                </div>
+            </div>
+
+            <!-- Coluna da direita -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1">
+
+                <!-- Card 1 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl lg:rounded-none lg:rounded-b-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-pencil-ruler"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Projetos personalizados</h3>
+                    <p class="text-gray-600">
+                        Reformas pensadas sob medida para o seu ambiente, gosto e necessidade.
+                    </p>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl lg:rounded-none lg:rounded-bl-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Mão de obra especializada</h3>
+                    <p class="text-gray-600">
+                        Profissionais experientes para garantir segurança, agilidade e acabamento impecável.
+                    </p>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-hard-hat"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Segurança em cada etapa</h3>
+                    <p class="text-gray-600">
+                        Seguimos as melhores práticas e normas técnicas para proteger sua obra e sua tranquilidade.
+                    </p>
+                </div>
+
+                <!-- Card 4 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl lg:rounded-none lg:rounded-l-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Acabamento de alto padrão</h3>
+                    <p class="text-gray-600">
+                        Pintura, revestimento, elétrica, hidráulica e muito mais com qualidade superior.
+                    </p>
+                </div>
+
+                <!-- Card 5 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl lg:rounded-none lg:rounded-t-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Cumprimento de prazos</h3>
+                    <p class="text-gray-600">
+                        Planejamento eficiente e execução rápida, sem comprometer a qualidade.
+                    </p>
+                </div>
+
+                <!-- Card 6 -->
+                <div class="bg-white p-6 flex flex-col h-full rounded-2xl lg:rounded-none lg:rounded-tl-2xl">
+                    <div class="text-yellow-500 text-3xl mb-4">
+                        <i class="fas fa-file-invoice-dollar"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold mb-2 text-gray-800">Orçamento transparente</h3>
+                    <p class="text-gray-600">
+                        Sem surpresas: você aprova cada etapa antes de começar e acompanha tudo.
+                    </p>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Cases de Sucesso -->
+    <section id="projects" class="py-24 relative bg-white font-[Poppins]">
+        <div class="text-center pb-15 px-4 max-w-5xl mx-auto">
+            <span class="text-yellow-500 font-semibold uppercase tracking-wider text-sm">Projetos</span>
+            <h2 class="text-4xl md:text-5xl font-extrabold text-gray-900 mt-2 mb-4">
+                Cuidando de Cada Detalhe do Seu Lar
+            </h2>
+            <p class="text-lg text-gray-600 items-center m-auto max-w-2xl">
+                Confira alguns dos nossos projetos e veja como podemos transformar seu espaço com qualidade e
+                profissionalismo.
+            </p>
+        </div>
+
+        <div class="flex flex-col gap-4 md:gap-8 w-full max-w-7xl px-4 md:px-5 lg:px-5 mx-auto">
+            <!-- Imagem grande -->
+            <div class="box w-full gallery">
+                <div class="swiper main-slide-carousel swiper-container relative">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="block xl:w-[1062px] w-full mx-auto h-fit md:h-[627px] rounded-3xl">
+                                <img src="https://pagedone.io/asset/uploads/1713943683.png" alt="Gallery image"
+                                    class="gallery-image w-full h-[300px] md:h-full mx-auto rounded-3xl object-cover" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="block xl:w-[1062px] w-full mx-auto h-fit md:h-[627px] rounded-3xl">
+                                <img src="https://pagedone.io/asset/uploads/1713943709.png" alt="Gallery image"
+                                    class="gallery-image w-full h-[300px] md:h-full mx-auto rounded-3xl object-cover" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="block xl:w-[1062px] w-full mx-auto h-fit md:h-[627px] rounded-3xl">
+                                <img src="https://pagedone.io/asset/uploads/1713943720.png" alt="Gallery image"
+                                    class="gallery-image w-full h-[300px] md:h-full mx-auto rounded-3xl object-cover" />
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="block xl:w-[1062px] w-full mx-auto h-fit md:h-[627px] rounded-3xl">
+                                <img src="https://pagedone.io/asset/uploads/1713943731.png" alt="Gallery image"
+                                    class="gallery-image w-full h-[300px] md:h-full mx-auto rounded-3xl object-cover" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thumbs -->
+            <div class="w-full">
+                <div class="nav-for-slider">
+                    <div class="swiper-wrapper justify-center md:gap-7 gap-4">
+                        <div class="swiper-slide thumbs-slide md:!w-[126px] md:!h-[135px]">
+                            <img src="https://pagedone.io/asset/uploads/1713943683.png" alt="Gallery image"
+                                class="gallery-image w-[120px] h-[100px] md:w-full md:h-full object-cover rounded-2xl border-2 border-gray-200 transition-all duration-500 hover:border-black cursor-pointer" />
+                        </div>
+                        <div class="swiper-slide thumbs-slide md:!w-[126px] md:!h-[135px]">
+                            <img src="https://pagedone.io/asset/uploads/1713943709.png" alt="Gallery image"
+                                class="gallery-image w-[100px] h-[100px] md:w-full md:h-full object-cover rounded-2xl border-2 border-gray-200 transition-all duration-500 hover:border-black cursor-pointer" />
+                        </div>
+                        <div class="swiper-slide thumbs-slide md:!w-[126px] md:!h-[135px]">
+                            <img src="https://pagedone.io/asset/uploads/1713943720.png" alt="Gallery image"
+                                class="gallery-image w-[100px] h-[100px] md:w-full md:h-full object-cover rounded-2xl border-2 border-gray-200 transition-all duration-500 hover:border-black cursor-pointer" />
+                        </div>
+                        <div class="swiper-slide thumbs-slide md:!w-[126px] md:!h-[135px]">
+                            <img src="https://pagedone.io/asset/uploads/1713943731.png" alt="Gallery image"
+                                class="gallery-image w-[100px] h-[100px] md:w-full md:h-full object-cover rounded-2xl border-2 border-gray-200 transition-all duration-500 hover:border-black cursor-pointer" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox">
+            <span class="close" id="close">&times;</span>
+            <img src="" alt="" class="lightbox-image" id="lightbox-image">
+        </div>
+    </section>
+
+
+
+    <!-- CTA -->
+    <section class="py-16 bg-white font-[Poppins]">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div
+                class="lg:py-14 lg:px-20 p-10 rounded-2xl bg-black flex items-center justify-between flex-col lg:flex-row">
+                <!-- Texto CTA -->
+                <div class="text-center mb-5 lg:text-left lg:mb-0">
+                    <h2 class="text-4xl text-white font-semibold mb-3">
+                        Pronto para transformar seu espaço?
+                    </h2>
+                    <p class="text-lg text-white">
+                        Solicite um orçamento agora mesmo com a Vitor Reformas.
+                    </p>
+                </div>
+
+                <!-- Botão -->
+                <a href="#"
+                    class="mt-4 lg:mt-0 flex items-center gap-2 bg-white text-black hover:scale-105 hover:text-yellow-500 rounded-full text-lg font-semibold py-4 px-8 transition-all duration-300 whitespace-nowrap">
+                    Solicitar Orçamento
+                    <svg width="19" height="14" viewBox="0 0 19 14" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        class="hidden md:block">
+                        <path
+                            d="M1.75 7L16.4167 7M11.8333 12.5L16.6852 7.64818C16.9907 7.34263 17.1435 7.18985 17.1435 7C17.1435 6.81015 16.9907 6.65737 16.6852 6.35182L11.8333 1.5"
+                            stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dúvidas -->
+    <section id="faq" class="py-16 bg-white font-[Poppins]">
+        <div class="max-w-3xl mx-auto px-4">
+            <h2 class="text-4xl md:text-5xl font-bold text-black mb-8">Dúvidas Frequentes</h2>
+
+            <div class="divide-y divide-gray-200">
+                <!-- Pergunta 1 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="gap-10 group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Vocês fazem reformas completas ou
+                                só
+                                pequenos reparos?</h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Realizamos desde pequenos reparos até reformas completas,
+                                    dependendo da sua necessidade e do espaço.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Pergunta 2 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Quanto tempo dura, em média, uma
+                                reforma?</h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Depende do tipo e da complexidade da obra. Reformas
+                                    simples podem durar alguns dias, já reformas completas podem levar semanas.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Pergunta 3 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Vocês oferecem garantia dos
+                                serviços?
+                            </h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Sim! Todos os nossos serviços possuem garantia contratual
+                                    com cobertura para defeitos de execução.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Pergunta 4 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Posso reformar só um cômodo da
+                                casa?
+                            </h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Claro! Você pode reformar apenas o que precisar: cozinha,
+                                    banheiro, quarto ou qualquer outro ambiente.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Pergunta 5 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Vocês ajudam com o planejamento e
+                                orçamento?</h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Sim, oferecemos consultoria gratuita para ajudar você a
+                                    planejar a reforma com o melhor custo-benefício.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+
+                <!-- Pergunta 6 -->
+                <div class="border-b border-gray-200 hover:border-yellow-500 group transition-colors duration-200">
+                    <details class="group overflow-hidden transition-all duration-300 ease-in-out">
+                        <summary class="w-full flex justify-between items-center cursor-pointer list-none py-6">
+                            <h3 class="text-lg font-semibold text-black w-full pr-3">Como funciona o pagamento?</h3>
+                            <span class="text-gray-500 group-open:hidden group-hover:text-yellow-500 text-2xl">+</span>
+                            <span
+                                class="text-gray-500 hidden group-open:inline group-hover:text-yellow-500 text-2xl">–</span>
+                        </summary>
+                        <div
+                            class="grid transition-all duration-300 ease-in-out group-open:grid-rows-[1fr] grid-rows-[0fr]">
+                            <div class="overflow-hidden">
+                                <p class="text-gray-600 mt-2">Trabalhamos com pagamento parcelado, boleto, Pix ou
+                                    cartão. Também é possível fazer um cronograma conforme o andamento da obra.</p>
+                            </div>
+                        </div>
+                    </details>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer class="w-full bg-black font-[Poppins] ">
+        <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-white">
+            <!--Grid-->
+
+            <div class="flex flex-col md:flex-row md:justify-between md:items-start flex-wrap gap-10 py-10 text-white">
+
+                <!-- Coluna da esquerda -->
+                <div class="col-span-full mb-10 lg:col-span-2 lg:mb-0">
+                    <div
+                        class="flex  items-center justify-center text-center md:flex-row md:items-center md:justify-start md:text-start mx-auto gap-2">
+                        <img src="img/logo.png" alt="Logo Arte de Revestir" class="w-10 h-10 object-contain" />
+                        <h3 class="text-2xl lg:text-3xl font-bold text-white uppercase">
+                            Arte <span class="text-gray-400">de </span>Revestir
+                        </h3>
+                    </div>
+                    <p class="py-6 text-sm lg:text-base lg:max-w-xs text-center lg:text-left text-white">
+                        Mais de 5 anos transformando ambientes com qualidade, agilidade e confiança. A reforma que você
+                        sonha começa aqui.
+                    </p>
+                    <a href="javascript:;"
+                        class="py-3 px-6 block w-fit bg-yellow-500  text-white hover:scale-105 border-2 border-transparent hover:border-yellow-600 rounded-full shadow-md text-sm font-semibold mx-auto lg:mx-0 transition-all duration-300">
+                        Solicitar Orçamento
+                    </a>
+                </div>
+
+                <div class="flex-row flex gap-20">
+                    <!-- Coluna Seções -->
+                    <div class="text-left">
+                        <h4 class="text-lg text-yellow-500 font-medium mb-7">Seções</h4>
+                        <ul class="text-sm transition-all duration-500">
+                            <li class="mb-6"><a href="#about"
+                                    class="text-white hover:text-yellow-500 hover:underline">Sobre
+                                    Nós</a></li>
+                            <li class="mb-6"><a href="#services"
+                                    class="text-white hover:text-yellow-500 hover:underline">Especialidades</a></li>
+                            <li class="mb-6"><a href="#projects"
+                                    class="text-white hover:text-yellow-500 hover:underline">Projetos</a></li>
+                            <li><a href="#faq" class="text-white hover:text-yellow-500 hover:underline">Dúvidas
+                                    Frequentes</a></li>
+                        </ul>
+                    </div>
+                    <!-- Coluna Contato -->
+                    <div class="text-left">
+                        <h4 class="text-lg text-yellow-500  font-medium mb-7">Entre em Contato</h4>
+                        <ul class="text-sm transition-all duration-500">
+                            <li class="mb-6"><a href="javascript:;"
+                                    class="text-white hover:text-yellow-500 hover:underline">Whatsapp</a></li>
+                            <li class="mb-6"><a href="javascript:;"
+                                    class="text-white hover:text-yellow-500 hover:underline">Instagram</a></li>
+                            <li class="mb-6"><a href="javascript:;"
+                                    class="text-white hover:text-yellow-500 hover:underline">Email</a></li>
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="py-7 border-t border-gray-200">
+                <div class="flex flex-col items-center gap-2 lg:flex-row lg:justify-between">
+                    <span class="text-sm text-gray-50 text-center">
+                        © <a href="#/" class="hover:underline  hover:text-yellow-500 ">Arte de Revestir</a> 2025, Todos
+                        os
+                        direitos reservados.
+                    </span>
+                    <span class="text-sm text-gray-50 text-center">
+                        Site desenvolvido por: <a href="#" class="hover:underline  hover:text-yellow-500 ">AutoPago</a>
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+
+
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        var swiper_thumbs = new Swiper(".nav-for-slider", {
+            loop: true,
+            spaceBetween: 30,
+            slidesPerView: 4,
+        });
+
+        var swiper = new Swiper(".main-slide-carousel", {
+            slidesPerView: 1,
+            effect: "fade",
+            thumbs: {
+                swiper: swiper_thumbs,
+            },
+        });
+
+        // Get references to elements
+        const gallery = document.querySelector('.gallery');
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImage = document.getElementById('lightbox-image');
+        const closeButton = document.getElementById('close');
+
+        // Add event listener to each image
+        gallery.addEventListener('click', e => {
+            if (e.target.classList.contains('gallery-image')) {
+                const imageSrc = e.target.src;
+                lightboxImage.src = imageSrc;
+                lightbox.style.display = 'flex';
+                document.body.classList.add('overflow-hidden'); // Bloqueia scroll
+            }
+        });
+
+        // Close lightbox when close button is clicked
+        closeButton.addEventListener('click', () => {
+            lightbox.style.display = 'none';
+            lightboxImage.src = '';
+            document.body.classList.remove('overflow-hidden'); // Libera scroll
+        });
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', e => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+                lightboxImage.src = '';
+                document.body.classList.remove('overflow-hidden'); // Libera scroll
+            }
+        });
+    </script>
+
+    <script>
+        document.getElementById('menuToggle').addEventListener('click', function () {
+            const menu = document.getElementById('mobileMenu');
+            menu.classList.toggle('hidden');
+        });
+    </script>
+
+
+
+</body>
+
+</html>
